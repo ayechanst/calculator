@@ -19,8 +19,20 @@ function divide(a, b) {
 }
 
 function operate(operation, a, b) {
-    return operation(a, b);
+    if (operation === '+') {
+        return add(a, b);
+    } else if (operation === '-') {
+        return subtract(a, b);
+    } else if (operation === '*') {
+        return multiply(a, b);
+    } else if (operation === '/') {
+        return divide(a, b);
+    } else {
+        return 'ERROR: operation function';
+    }
 }
+
+
 
 let buttons = document.querySelectorAll('.btn');
 let clearButton = document.getElementById('clear');
@@ -39,17 +51,9 @@ buttons.forEach((button) => {
             aArray.push(button.innerHTML);
         } else if (isNaN(button.innerHTML)) { 
 
-            operator = button.innerHTML;
-
-            // if (button.innerHTML === '+') {
-            //     operator = 'add';
-            // } else if (button.innerHTML === '-') {
-            //     operator = 'subtract';
-            // } else if (button.innerHTML === '*') {
-            //     operator = 'multiply';
-            // } else if (button.innerHTML === '/') {
-            //     operator = 'divide';
-            // }
+            if (button.innerHTML !== '=' && button.innerHTML !== 'clear') {
+                operator = button.innerHTML;
+            }
 
         } else {
             bArray.push(button.innerHTML);
@@ -66,9 +70,8 @@ buttons.forEach((button) => {
             })
             b = Number(bString);
 
-            // let answer;
-            // answer = operate(operator, a, b)
-            // display.innerHTML = answer;
+            let answer = operate(operator, a, b);
+            display.innerHTML = `${answer}`;
         }
 
 

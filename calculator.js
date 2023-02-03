@@ -22,47 +22,30 @@ function operate(operation, a, b) {
     return operation(a, b);
 }
 
-let numButtons = document.querySelectorAll('.numBtn');
-let operationButtons = document.querySelectorAll('.opBtn');
+let buttons = document.querySelectorAll('.btn');
 let clearButton = document.getElementById('clear');
 let equalsButton = document.getElementById('equals');
 let standbyForCalculation = [];
 
-function buildOperand() {
-    let numberString = '';
-    let prepareNumber = [];
-    let nonNumBtnWasClicked = false;
-    numButtons.forEach((button) => {
-        button.addEventListener('click', function makeNum() {
-            display.innerHTML = `${button.innerHTML}`;
-            prepareNumber.push(`${button.innerHTML}`);
-            console.log(prepareNumber);
-
-            operationButtons.forEach((opButton) => {             //checks if non-num button was clicked
-                opButton.onclick = () => {       
-                    nonNumBtnWasClicked = true;                       
-                }
-            })
-            if (nonNumBtnWasClicked) {
-                button.removeEventListener('click', makeNum)
-                prepareNumber.forEach((number) => {
-                    numberString += number;
-                })
-                standbyForCalculation.push(Number(numberString));
-                }
-    
-            //pushes number type into standbyForCalcualtion at some point
-        })
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        function doWhileLoop() {
+            let arrayOfStrings = [];
+            let numberString = '';
+            while (!isNaN(button.innerHTML)) {  
+                arrayOfStrings.push(button.innerHTML);
+                // if (isNaN(button.innerHTML)) {
+                //     arrayOfStrings.forEach((item) => numberString += item);
+                //     break;
+                // }
+            }
+            console.log(arrayOfStrings);
+            console.log(numberString);
+            console.log(Number(numberString));
+            return Number(numberString);
+        }
+        doWhileLoop();
     })
-}
+})
 
-function getOperator() {
-    operationButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-            standbyForCalculation.push(`${button.innerHTML}`);
-        })
-    })
-}
-
-buildOperand();
-console.log(standbyForCalculation);
+//    ``

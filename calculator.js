@@ -33,10 +33,7 @@ function operate(operation, a, b) {
 }
 
 
-
 let buttons = document.querySelectorAll('.btn');
-let clearButton = document.getElementById('clear');
-let equalsButton = document.getElementById('equals');
 let operator = '';
 let aArray = [];
 let bArray = [];
@@ -47,18 +44,34 @@ let b;
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
+
+        function clear() {
+            operator = '';
+            aArray = [];
+            bArray = [];
+            aString = '';
+            bString = '';
+            a = null;
+            b = null;
+        }
+        
+        if (button.innerHTML === 'clear') {
+            clear();
+            console.log('clear has been clicked');
+        }
+        
         if (!isNaN(button.innerHTML) && operator == false) {
             aArray.push(button.innerHTML);
         } else if (isNaN(button.innerHTML)) { 
-
+            
             if (button.innerHTML !== '=' && button.innerHTML !== 'clear') {
                 operator = button.innerHTML;
             }
-
+            
         } else {
             bArray.push(button.innerHTML);
         }
-
+        
         if (button.innerHTML === '=') {
             aArray.forEach((aNum) => {
                 aString += aNum;
@@ -69,18 +82,18 @@ buttons.forEach((button) => {
                 bString += bNum;
             })
             b = Number(bString);
-
+            
             let answer = operate(operator, a, b);
             display.innerHTML = `${answer}`;
+            
         }
 
-
         console.log('a array: ' + aArray);
-        console.log('a string: ' + aString);
+        //console.log('a string: ' + aString);
         console.log('a: ' + a);
         console.log('operator: ' + operator);
         console.log('b array: ' + bArray);
-        console.log('b string: ' + bString);
+        //console.log('b string: ' + bString);
         console.log('b: ' + b);
     })
 })

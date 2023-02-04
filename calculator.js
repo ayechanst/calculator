@@ -32,6 +32,15 @@ function operate(operation, a, b) {
     }
 }
 
+function clear() {
+    operator = '';
+    aArray = [];
+    bArray = [];
+    aString = '';
+    bString = '';
+    a = null;
+    b = null;
+}
 
 let buttons = document.querySelectorAll('.btn');
 let operator = '';
@@ -45,48 +54,46 @@ let b;
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
 
-        function clear() {
-            operator = '';
-            aArray = [];
-            bArray = [];
-            aString = '';
-            bString = '';
-            a = null;
-            b = null;
-        }
-        
+
         if (button.innerHTML === 'clear') {
             clear();
-            console.log('clear has been clicked');
+            display.innerHTML = '0';
         }
-        
+
+        //Collect numbers and display data
+
         if (!isNaN(button.innerHTML) && operator == false) {
             aArray.push(button.innerHTML);
-        } else if (isNaN(button.innerHTML)) { 
-            
+            aString += aArray[aArray.length - 1];
+            a = Number(aString);
+            display.innerHTML = a;
+        } 
+        
+
+        else if (isNaN(button.innerHTML)) { 
             if (button.innerHTML !== '=' && button.innerHTML !== 'clear') {
                 operator = button.innerHTML;
             }
-            
-        } else {
+        } 
+        
+        
+        else {
             bArray.push(button.innerHTML);
+            bString += bArray[bArray.length - 1];
+            b = Number(bString);
+            display.innerHTML = b;
         }
         
+        //End collect numbers and display data phase 
+        
         if (button.innerHTML === '=') {
-            aArray.forEach((aNum) => {
-                aString += aNum;
-            })
-            a = Number(aString);
-            
-            bArray.forEach((bNum) => {
-                bString += bNum;
-            })
-            b = Number(bString);
             
             let answer = operate(operator, a, b);
             display.innerHTML = `${answer}`;
-            
         }
+
+
+
 
         console.log('a array: ' + aArray);
         //console.log('a string: ' + aString);

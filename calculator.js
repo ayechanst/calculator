@@ -21,12 +21,16 @@ function divide(a, b) {
 }
 
 function clear() {
-    operator = aString = bString = '';
-    aArray = bArray = stack = trashStack = [];
-    a = b = answer = runningTotal = null;
+    operator = '';
+    a = '';
+    b = '';
+    display.innerHTML = '';
+    smallDisplay.innerHTML = '';
 }
 
 function operate(operation, a, b) {
+    a = Number(a);
+    b = Number(b);
     if (operation === '+') {
         return add(a, b);
     } else if (operation === '-') {
@@ -40,81 +44,50 @@ function operate(operation, a, b) {
     }
 }
 
+let numButtons = document.querySelectorAll('.number');
+let operatorButtons = document.querySelectorAll('.operator');
+let clearButton = document.getElementById('clear');
+let equalsButton = document.getElementById('equals');
 
-let buttons = document.querySelectorAll('.btn');
-let operator = '';
-let aArray = [];
-let bArray = [];
-let aString = '';
-let bString = '';
-let answer;
-let runningTotal;
-let a;
-let b;
 let stack = [];  //there should never be more than 3 values in here
-let trashStack = [];
-let stackComponentA;
-let stackComponentB
+let operator = '';
+let a = '';
+let b = '';
+let answer;
+let runningTotal = 0;
 
-let currentNum
+clearButton.addEventListener('click', () => {
+    clear();
+})
 
-buttons.forEach((button) => {
+numButtons.forEach((button) => {                            //gets the numbers
     button.addEventListener('click', () => {
-
-        
-        if (button.innerHTML === 'clear') {
-            clear();
-            display.innerHTML = '0';
+        let num = button.innerHTML;  //technically a string
+        if (!operator) {
+            a += num;
+            display.innerHTML = `${a}`;
         }
-        
-        //Collect numbers and display data
-        
-        if (!isNaN(button.innerHTML) && operator == false) {        //get first number
-            aArray.push(button.innerHTML);
-            aString += aArray[aArray.length - 1];
-            a = Number(aString);
-            trashStack.push(a); //we want to slice this each time btn is clicked so there is only 1 value
-            stackComponentA = trashStack.pop();
-            display.innerHTML = a;
-        } 
-        
-        
-        else if (isNaN(button.innerHTML)) { 
-            if (button.innerHTML !== '=' && button.innerHTML !== 'clear') {   
-                operator = button.innerHTML
-                trashStack.push(button.innerHTML);
-                
-                display.innerHTML = `${a} ${operator}`;
-            }
-        } 
-        
         else {
-            bArray.push(button.innerHTML);                   //get second number
-            bString += bArray[bArray.length - 1];
-            b = Number(bString);
-            trashStack.push(b);
+            b += num;
             display.innerHTML = `${a} ${operator} ${b}`;
         }
-        
-        if (button.innerHTML === '=') {         //this should execute the stack, so make sure stack looks good first
-            
-            answer = operate(operator, a, b);
-            smallDisplay.innerHTML = `${a} ${operator} ${b} = `;
-            display.innerHTML = `${answer}`;
-            testDisplay.innerHTML = `${stack}`;
-        }
-        
-        console.log('a array: ' + aArray);
-        console.log('a string: ' + aString);
-        console.log('a: ' + a);
-        console.log('b array: ' + bArray);
-        console.log('b string: ' + bString);
-        console.log('b: ' + b);
-        console.log('operator: ' + operator);
-        console.log(trashStack);
-        console.log(stack);
-        
     })
 })
 
+operatorButtons.forEach((button) => {                   //gets the operator sign(s)
+    button.addEventListener('click', () => {
+        operator = button.innerHTML;
+        display.innerHTML = `${a} ${operator}`;
+    })
+})
+
+
+equalsButton.addEventListener('click', () => {          //calculates result
+    answer = operate(operator, a, b);
+    display.innerHTML = `${answer}`;
+})
+
 //    ``
+console.log('a: ' + a);
+console.log('b: ' + b);
+console.log('operator: ' + operator);

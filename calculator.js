@@ -49,20 +49,26 @@ let operatorButtons = document.querySelectorAll('.operator');
 let clearButton = document.getElementById('clear');
 let equalsButton = document.getElementById('equals');
 
-let stack = [];  //there should never be more than 3 values in here
 let operator = '';
 let a = '';
 let b = '';
 let answer;
 let runningTotal = 0;
 
-clearButton.addEventListener('click', () => {
+function test() {
+    console.log('a: ' + a);
+    console.log('b: ' + b);
+    console.log('running total: ' + runningTotal);
+    console.log('operator: ' + operator);
+}
+
+clearButton.addEventListener('click', () => {    //clears all values
     clear();
 })
 
 numButtons.forEach((button) => {                            //gets the numbers
     button.addEventListener('click', () => {
-        let num = button.innerHTML;  //technically a string
+        let num = button.innerHTML; 
         if (!operator) {
             a += num;
             display.innerHTML = `${a}`;
@@ -71,23 +77,27 @@ numButtons.forEach((button) => {                            //gets the numbers
             b += num;
             display.innerHTML = `${a} ${operator} ${b}`;
         }
+        test();
     })
 })
 
 operatorButtons.forEach((button) => {                   //gets the operator sign(s)
     button.addEventListener('click', () => {
-        operator = button.innerHTML;
-        display.innerHTML = `${a} ${operator}`;
+        if (!operator) {
+            operator = button.innerHTML;
+            display.innerHTML = `${a} ${operator}`;
+        } else {
+            runningTotal = operate(operator, a, b);   //if theres already an operator, getting a running total
+            operator = button.innerHTML;
+        }
+        test();
     })
 })
-
 
 equalsButton.addEventListener('click', () => {          //calculates result
     answer = operate(operator, a, b);
     display.innerHTML = `${answer}`;
+    test();
 })
 
 //    ``
-console.log('a: ' + a);
-console.log('b: ' + b);
-console.log('operator: ' + operator);

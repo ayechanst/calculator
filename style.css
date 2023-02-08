@@ -1,3 +1,11 @@
+
+@font-face {
+    font-family: bibleFont;
+    src: url(./fonts/gebetbuch-fraktur/GebetbuchFraktur.ttf);
+    font-weight: bold;
+}
+
+
 body {
     color: black;
     background-image: url(./images/confession-booth.jpg);
@@ -10,20 +18,22 @@ body {
 }
 
 h1 {
-    color: yellow;
+    font-family: bibleFont;
+    color: crimson;
 }
 
 .background {
     background-image: url(/images/church.jpg);
     background-position: center center;
     background-size: cover;
-    height: 250px;
-    width: auto;
+    height: 300px;
+    width: 150px;
 }
 
 .display-container {
+    font-family: bibleFont;
+    font-size: x-large;
     padding: 10px;
-    font-family: 'digital-clock-font';
 }
 
 .display {
@@ -38,9 +48,20 @@ h1 {
 .row {
     display: flex;
     padding: 2.5px;
-    justify-content: space-between;
+    justify-content: left;
+    gap: 6px;
 }
 
 button {
-    background-color: darksalmon;
+    font-family: bibleFont;
+    font-size: x-large;
+    color: crimson;
+    background-color: white;
 }
+
+
+/* 
+-add on hover button effects of holy light
+-flash and slowly fade the screen from a yellow light when the flash button is cleared
+-make buttons look cooler
+*/

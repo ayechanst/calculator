@@ -25,8 +25,8 @@ function clear() {
     operator = '';
     a = '';
     b = '';
-    display.innerHTML = '-----';
-    smallDisplay.innerHTML = '-----';
+    display.innerHTML = 'God';
+    smallDisplay.innerHTML = 'Wrath of';
 }
 
 function operate(operation, a, b) {
@@ -43,6 +43,10 @@ function operate(operation, a, b) {
     } else {
         return 'ERROR: operation function';
     }
+}
+
+function round(num) {
+    return Math.round(num * 100) / 100
 }
 
 let numButtons = document.querySelectorAll('.number');
@@ -90,9 +94,9 @@ operatorButtons.forEach((button) => {                   //gets the operator sign
     button.addEventListener('click', () => {
         if (!operator) {
             operator = button.innerHTML;
-            display.innerHTML = `${a} ${operator}`;
+            display.innerHTML = `${a} ${operator}`; 
         } else {
-            runningTotal = operate(operator, a, b);   //if theres already an operator, getting a running total
+            runningTotal = round(operate(operator, a, b));
             smallDisplay.innerHTML = `${a} ${operator} ${b} = `;
             operator = button.innerHTML;
             display.innerHTML = `${runningTotal} ${operator}`;
@@ -104,16 +108,15 @@ operatorButtons.forEach((button) => {                   //gets the operator sign
 
 equalsButton.addEventListener('click', () => {          //calculates result
     if (runningTotal) {
-        answer = operate(operator, runningTotal, b);
+        answer = round(operate(operator, runningTotal, b));
         smallDisplay.innerHTML = `${runningTotal} ${operator} ${b} = `;
         runningTotal = answer;
         display.innerHTML = `${answer}`;
     } else {
-        answer = operate(operator, a, b);
+        answer = round(operate(operator, a, b));
         smallDisplay.innerHTML = `${a} ${operator} ${b} = `;
         display.innerHTML = `${answer}`;
         test();
     }
 })
 
-//    ``

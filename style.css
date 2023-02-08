@@ -5,3 +5,6 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+
+/* calculator should have a 1 minute delay before displaying result, hence the name calcuLATER */

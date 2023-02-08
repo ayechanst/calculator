@@ -21,6 +21,7 @@ function divide(a, b) {
 }
 
 function clear() {
+    runningTotal = '';
     operator = '';
     a = '';
     b = '';
@@ -53,7 +54,7 @@ let operator = '';
 let a = '';
 let b = '';
 let answer;
-let runningTotal = 0;
+let runningTotal = '';
 
 function test() {
     console.log('a: ' + a);
@@ -72,6 +73,10 @@ numButtons.forEach((button) => {                            //gets the numbers
         if (!operator) {
             a += num;
             display.innerHTML = `${a}`;
+        } else if (runningTotal) {
+            a = runningTotal;  //test
+            b += num;
+            display.innerHTML = `${runningTotal} ${operator} ${b}`;
         }
         else {
             b += num;
@@ -89,15 +94,22 @@ operatorButtons.forEach((button) => {                   //gets the operator sign
         } else {
             runningTotal = operate(operator, a, b);   //if theres already an operator, getting a running total
             operator = button.innerHTML;
+            b = '';
         }
         test();
     })
 })
 
 equalsButton.addEventListener('click', () => {          //calculates result
-    answer = operate(operator, a, b);
-    display.innerHTML = `${answer}`;
-    test();
+    if (runningTotal) {
+        answer = operate(operator, runningTotal, b);
+        display.innerHTML = `${answer}`;
+        runningTotal = answer;
+    } else {
+        answer = operate(operator, a, b);
+        display.innerHTML = `${answer}`;
+        test();
+    }
 })
 
 //    ``

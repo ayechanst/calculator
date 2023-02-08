@@ -25,8 +25,8 @@ function clear() {
     operator = '';
     a = '';
     b = '';
-    display.innerHTML = '';
-    smallDisplay.innerHTML = '';
+    display.innerHTML = '-----';
+    smallDisplay.innerHTML = '-----';
 }
 
 function operate(operation, a, b) {
@@ -74,7 +74,7 @@ numButtons.forEach((button) => {                            //gets the numbers
             a += num;
             display.innerHTML = `${a}`;
         } else if (runningTotal) {
-            a = runningTotal;  //test
+            a = runningTotal;  
             b += num;
             display.innerHTML = `${runningTotal} ${operator} ${b}`;
         }
@@ -93,7 +93,9 @@ operatorButtons.forEach((button) => {                   //gets the operator sign
             display.innerHTML = `${a} ${operator}`;
         } else {
             runningTotal = operate(operator, a, b);   //if theres already an operator, getting a running total
+            smallDisplay.innerHTML = `${a} ${operator} ${b} = `;
             operator = button.innerHTML;
+            display.innerHTML = `${runningTotal} ${operator}`;
             b = '';
         }
         test();
@@ -103,10 +105,12 @@ operatorButtons.forEach((button) => {                   //gets the operator sign
 equalsButton.addEventListener('click', () => {          //calculates result
     if (runningTotal) {
         answer = operate(operator, runningTotal, b);
-        display.innerHTML = `${answer}`;
+        smallDisplay.innerHTML = `${runningTotal} ${operator} ${b} = `;
         runningTotal = answer;
+        display.innerHTML = `${answer}`;
     } else {
         answer = operate(operator, a, b);
+        smallDisplay.innerHTML = `${a} ${operator} ${b} = `;
         display.innerHTML = `${answer}`;
         test();
     }

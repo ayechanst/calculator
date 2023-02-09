@@ -1,7 +1,7 @@
 'use strict'
 
 const display = document.getElementById('display');
-const smallDisplay = document.getElementById('secondary-display');
+const smallDisplay = document.getElementById('secondary display');
 const testDisplay = document.querySelector('.test');
 
 function add(a, b) {
@@ -25,8 +25,6 @@ function clear() {
     operator = '';
     a = '';
     b = '';
-    display.innerHTML = 'God';
-    smallDisplay.innerHTML = 'Wrath of';
 }
 
 function operate(operation, a, b) {
@@ -53,6 +51,7 @@ let numButtons = document.querySelectorAll('.number');
 let operatorButtons = document.querySelectorAll('.operator');
 let clearButton = document.getElementById('clear');
 let equalsButton = document.getElementById('equals');
+let holyLight = document.querySelector('.display-container');
 
 let operator = '';
 let a = '';
@@ -69,6 +68,11 @@ function test() {
 
 clearButton.addEventListener('click', () => {    //clears all values
     clear();
+    holyLight.classList.add('holy-light');
+    display.innerHTML = 'God';
+    smallDisplay.innerHTML = 'Wrath of';
+    holyLight.classList.remove('holy-light');
+    
 })
 
 numButtons.forEach((button) => {                            //gets the numbers
@@ -119,17 +123,4 @@ equalsButton.addEventListener('click', () => {          //calculates result
         test();
     }
 })
-
-//css functions
-
-let buttons = document.querySelectorAll('.btn')
-console.log(buttons);
-
-buttons.forEach((button) => {
-    button.addEventListener('hover', () => {
-        button.classList.toggle('holy-light');
-        console.log('this is working');
-    })
-})
-
 

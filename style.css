@@ -26,8 +26,15 @@ h1 {
     background-image: url(/images/church.jpg);
     background-position: center center;
     background-size: cover;
+    margin: 3px crimson;
     height: 300px;
     width: 150px;
+}
+
+.red-border {
+    border-color: crimson;
+    border-width: 5px;
+    border-style: solid;
 }
 
 .display-container {
@@ -62,11 +69,10 @@ button {
 }
 
 button:hover {
-    background-color: rgb(248, 241, 108);
+    background-color: rgb(231, 231, 90);
 }
 
-
-/* 
--add on hover button effects of holy light
--flash and slowly fade the screen from a yellow light when the clear button is pressed
-*/
+#subtract
+ {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}

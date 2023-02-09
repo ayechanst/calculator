@@ -34,10 +34,11 @@ h1 {
     font-family: bibleFont;
     font-size: x-large;
     padding: 10px;
+    color: crimson;
 }
 
 .display {
-    background-color: darkgreen;
+    background-color:rgb(236, 226, 226);
     padding: 5px;
 }
 
@@ -56,12 +57,16 @@ button {
     font-family: bibleFont;
     font-size: x-large;
     color: crimson;
-    background-color: white;
+    background-color: rgb(236, 226, 226);
+    transition: background-color 0.7s;
+}
+
+button:hover {
+    background-color: rgb(248, 241, 108);
 }
 
 
 /* 
 -add on hover button effects of holy light
--flash and slowly fade the screen from a yellow light when the flash button is cleared
--make buttons look cooler
+-flash and slowly fade the screen from a yellow light when the clear button is pressed
 */

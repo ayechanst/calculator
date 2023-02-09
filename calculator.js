@@ -120,3 +120,16 @@ equalsButton.addEventListener('click', () => {          //calculates result
     }
 })
 
+//css functions
+
+let buttons = document.querySelectorAll('.btn')
+console.log(buttons);
+
+buttons.forEach((button) => {
+    button.addEventListener('hover', () => {
+        button.classList.toggle('holy-light');
+        console.log('this is working');
+    })
+})
+
+
